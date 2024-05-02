@@ -5,12 +5,12 @@ gamma_bardB = 0:30;
 gamma_bar = 10.^(gamma_bardB./10);
 gammabar_SR = gamma_bar;
 gammabar_RD = gamma_bar;
-gammabar_hIdb = 1;
+gammabar_hIdb = 1; % SNR of the eavesdroper link
 gammabar_hI = 10.^(gammabar_hIdb./10);
 m_SR = 1;
-L = 1;
-N=30;
-gamma_0db = 3;
+L = 1; % Number of eavesdroppers
+N=30; % Number of RIS reflecting elements
+gamma_0db = 3; 
 gamma_0 = 10.^(gamma_0db./10);
 s = (N *pi) / 4;
 SIGMA = sqrt(N * (1 - (pi^2 / 16)));
@@ -77,5 +77,5 @@ for index = 1:length(gamma_bar)
 
 end
 semilogy(gamma_bardB, SOP)  
-xlabel('gamma-bar')
-ylabel('SOP')
+xlabel('γ̄ (dB)')
+ylabel('Pr (Cs ≤ Co)')
