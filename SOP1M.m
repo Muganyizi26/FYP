@@ -52,8 +52,8 @@ for index = 1:length(gamma_bar)
                         I_5=[];
                         for m=0:(p-k)
                             I_6=[];
-                            for z=0:Inf
-                                I_6(z+1)= (nchoosek((-L-v),z)*(Delta_SE(index)^z)*(factorial(k_1+p-k+z)))/((Delta_SE(index) + Delta_SR(index)*(1+gamma_0))^(k_1+p-k+z-1));
+                            for z=0:20
+                                I_6(z+1)= (((-1)^z)*nchoosek((L+v+z-1),z)*(Delta_SE(index)^z)*(factorial(k_1+p-k+z)))/((Delta_SE(index) + Delta_SR(index)*(1+gamma_0))^(k_1+p-k+z-1));
                             end
                             I_5(m+1) = nchoosek((p-k),m)*(gamma_0^(p-m))*(gammabar_hI^(v+z))*sum(I_6);
                         end
@@ -61,7 +61,7 @@ for index = 1:length(gamma_bar)
                     end
                     I_3(v+1) = nchoosek((k_1+1),v)*(factorial(L+v-1))*exp(-Delta_SR(index)*gamma_0)*sum(I_4);
                 end
-                I_2(k_1+1) = ((((-delta_SE)^k_1)*pochhammer((1-m_SE),k_1))/(((factorial(k_1))^2)*(gammabar_SE(index)^(k_1+1))*(factorial(L-1))))*sum(I_3);
+                I_2(k_1+1) = ((((-delta_SE)^k_1)*pochhammer((1-m_SE),k_1))/(((factorial(k_1))^2)*(gammabar_SE^(k_1+1))*(factorial(L-1))))*sum(I_3);
             end
             I_1(p+1) = ((((-delta_SR)^k_2)*pochhammer((1-m_SR),k_2))/((factorial(k_2))*(gammabar_SR(index)^(k_2+1))*factorial(p)*(Delta_SR(index)^(k_2-p+1))))*alpha_SE*sum(I_2);
         end
@@ -88,7 +88,7 @@ for index = 1:length(gamma_bar)
                                     for m=0:(p+r+q-k)                                        
                                         E_9=[];
                                         for z=0:10
-                                            E_9(z+1)= (nchoosek((-L-v),z)*(Delta_SE(index)^z)*(factorial(k_1+p+r+q-k+z)))/((Delta_SE(index) + Delta_SR(index)*(1+gamma_0))^(k_1+p+r+q-k+z-1));
+                                            E_9(z+1)= (((-1)^z)*nchoosek((L+v+z-1),z)*(Delta_SE(index)^z)*(factorial(k_1+p+r+q-k+z)))/((Delta_SE(index) + Delta_SR(index)*(1+gamma_0))^(k_1+p+r+q-k+z-1));
                                         end
                                         E_8(m+1) = nchoosek((p+r+q-k),m)*(gamma_0^(p+r+q-m))*(gammabar_hI^(v+z))*sum(E_9);
                                     end
@@ -96,7 +96,7 @@ for index = 1:length(gamma_bar)
                                 end
                                 E_6(v+1) = nchoosek((k_1+1),v)*(factorial(L+v-1))*exp(-Delta_SR(index)*gamma_0)*sum(E_7);
                             end
-                            E_5(k_1+1) = (((-delta_SE^(k_1))*pochhammer((1-m_SE),k_1))/(((factorial(k_1))^2)*(gammabar_SE(index)^(k_1+1))*(factorial(L-1))))*sum(E_6);
+                            E_5(k_1+1) = (((-delta_SE^(k_1))*pochhammer((1-m_SE),k_1))/(((factorial(k_1))^2)*(gammabar_SE^(k_1+1))*(factorial(L-1))))*sum(E_6);
                         end
                         E_4(q+1) = nchoosek((2*n+1-r),q)*((sqrt(A))^(r+q))*((B(index)/sqrt(A))^(2*n+1-r-q))*(factorial(L-1+r))*alpha_SE*sum(E_5);
                     end

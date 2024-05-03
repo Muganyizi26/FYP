@@ -4,19 +4,21 @@ close all
 
 gamma_bardB = 10:30;
 gamma_bar = 10.^(gamma_bardB./10);
-Lambdabar_Q = gamma_bar;
+
 gammabar_SR = gamma_bar;
 gammabar_RD = gamma_bar;
-m_SR = 5;
+m_SR = 10;
 m_Q = m_SR;
 N=30;
 gamma_0db = 2;
 gamma_0 = 10.^(gamma_0db./10);
+Lambdabar_QdB = 3;
+Lambdabar_Q = 10.^(Lambdabar_QdB./10);
 s = (N *pi) / 4;
 SIGMA = sqrt(N * (1 - (pi^2 / 16)));
 C = ((s^2)/(2*SIGMA^2));
-b_SR = 0.251;
-omega_SR = 0.279;
+b_SR = 0.158;
+omega_SR = 1.29;
 alpha_SR = ((2 * b_SR * m_SR) / ((2 * b_SR * m_SR) + omega_SR)^(m_SR))/ (2 * b_SR);
 alpha_Q = alpha_SR;
 
@@ -46,7 +48,7 @@ for index = 1:length(gamma_bar)
                     end
                     I_2(v+1) = nchoosek(t,v)*sum(I_3);
                 end
-                I_1(k_2+1) = (((-delta_Q)^k_2)*pochhammer((1-m_Q),k_2))/((factorial(k_2))*(Lambdabar_Q(index))^(k_2+1))*sum(I_2);
+                I_1(k_2+1) = (((-delta_Q)^k_2)*pochhammer((1-m_Q),k_2))/((factorial(k_2))*(Lambdabar_Q)^(k_2+1))*sum(I_2);
             end
             J_1(k_1+1, t+1) = ((alpha_SR*pochhammer((1-m_SR),k_1) *((-delta_SR)^k_1))/((factorial(k_1))*(factorial(t))*(gammabar_SR(index)^(k_1+1))*(Delta_SR(index)^(k_1-t+1))))*alpha_Q*sum(I_1);
         end
@@ -67,7 +69,7 @@ for index = 1:length(gamma_bar)
                             end
                             Z_2(v+1) = nchoosek((t+p),v)*sum(Z_3);
                         end
-                        Z_1(k_2+1) = ((((-delta_Q)^k_2)*pochhammer((1-m_Q),k_2))/((factorial(k_2))*(Lambdabar_Q(index)^(k_2+1))))*sum(Z_2);
+                        Z_1(k_2+1) = ((((-delta_Q)^k_2)*pochhammer((1-m_Q),k_2))/((factorial(k_2))*(Lambdabar_Q^(k_2+1))))*sum(Z_2);
                     end
                     J_2(k_1+1, t+1,k+1,p+1) = (((nchoosek((2*k-1),p))*(B(index)^(2*k-1-p))*((-1)^(k+1))*alpha_SR*pochhammer((1-m_SR),k_1)*((-delta_SR)^k_1)*(exp(((B(index)^2)-(A*C))/A)))...
                         /((A^(k-0.5-p))*(2*k-1)*(factorial(k-1))*(sqrt(2*pi*A*(SIGMA^2)*(gammabar_RD(index)^2)))*(factorial(k_1))*(factorial(t))*(gammabar_SR(index)^(k_1+1))*(delta_SR^(k_1-t+1))))...
