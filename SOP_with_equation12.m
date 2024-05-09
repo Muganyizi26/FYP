@@ -2,7 +2,7 @@ clc
 clear all
 close all
 
-gamma_bardB = 10:30;
+gamma_bardB = 0:30;
 gamma_bar = 10.^(gamma_bardB./10);
 
 gammabar_SR = gamma_bar;
@@ -12,7 +12,7 @@ m_Q = m_SR;
 N=30;
 gamma_0db = 2;
 gamma_0 = 10.^(gamma_0db./10);
-Lambdabar_QdB = 3;
+Lambdabar_QdB = 1;
 Lambdabar_Q = 10.^(Lambdabar_QdB./10);
 s = (N *pi) / 4;
 SIGMA = sqrt(N * (1 - (pi^2 / 16)));

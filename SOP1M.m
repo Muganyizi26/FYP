@@ -1,19 +1,19 @@
 clc
 clear
 close all
-gamma_bardB = 10:30;
+gamma_bardB = 0:30;
 gamma_bar = 10.^(gamma_bardB./10);
 gammabar_SR = gamma_bar;
 % gammabar_SE = gamma_bar;
-gammabar_RD = gamma_bar;
+gammabar_RD = gamma_bar; %find out more even in the derivation for F_RD
 Lambdabar_1 = gamma_bar;
-gammabar_hIdb = 10; % SNR of the eavesdroper link
+gammabar_hIdb = 3; % SNR of the interference link
 gammabar_hI = 10.^(gammabar_hIdb./10); 
 m_SR = 1;
 m_SE = m_SR;
 L = 1; % Number of interferers 
 N=30; % Number of RIS reflecting elements
-gammabar_SEdB = 10;
+gammabar_SEdB = 3;
 gammabar_SE = 10.^(gammabar_SEdB./10); % SNR of the eavesdropper
 gamma_0db = 2; % target secrecy threshold SNR
 gamma_0 = 10^(gamma_0db/10);
@@ -52,7 +52,7 @@ for index = 1:length(gamma_bar)
                         I_5=[];
                         for m=0:(p-k)
                             I_6=[];
-                            for z=0:20
+                            for z=0:m
                                 I_6(z+1)= (((-1)^z)*nchoosek((L+v+z-1),z)*(Delta_SE(index)^z)*(factorial(k_1+p-k+z)))/((Delta_SE(index) + Delta_SR(index)*(1+gamma_0))^(k_1+p-k+z-1));
                             end
                             I_5(m+1) = nchoosek((p-k),m)*(gamma_0^(p-m))*(gammabar_hI^(v+z))*sum(I_6);
@@ -87,7 +87,7 @@ for index = 1:length(gamma_bar)
                                     E_8 = [];
                                     for m=0:(p+r+q-k)                                        
                                         E_9=[];
-                                        for z=0:10
+                                        for z=0:m
                                             E_9(z+1)= (((-1)^z)*nchoosek((L+v+z-1),z)*(Delta_SE(index)^z)*(factorial(k_1+p+r+q-k+z)))/((Delta_SE(index) + Delta_SR(index)*(1+gamma_0))^(k_1+p+r+q-k+z-1));
                                         end
                                         E_8(m+1) = nchoosek((p+r+q-k),m)*(gamma_0^(p+r+q-m))*(gammabar_hI^(v+z))*sum(E_9);
